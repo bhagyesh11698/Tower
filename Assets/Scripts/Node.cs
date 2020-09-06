@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Node : MonoBehaviour
 {
@@ -11,27 +12,45 @@ public class Node : MonoBehaviour
     private Renderer rend;
     private Color startColor;
 
+    BuildManager buildManager;
+
     private void Start()
     {
         rend = GetComponent<Renderer>();
         startColor = rend.material.color;
+
+        buildManager = BuildManager.instance;
     }
 
     private void OnMouseDown()
     {
-        if (turret != null)
-        {
+        if (EventSystem.current.IsPointerOverGameObject())
+        { // when mouse is on shop panel, disable click on nodes to spawn turret
             return;
         }
 
+        if (buildManager.GetTurrentToBuild() == null)
+            return;
+
+        if (turret != null)
+            return;
+
         // build a turret
-        GameObject turretToBuild = BuildManager.instance.GetTurrentToBuild();
+        GameObject turretToBuild = buildManager.GetTurrentToBuild();
         turret = (GameObject)Instantiate(turretToBuild, transform.position + positionOffset, transform.rotation);
 
     }
 
     private void OnMouseEnter()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
+
+        if (buildManager.GetTurrentToBuild() == null)
+            return;
+
         rend.material.color = hoverColor;
     }
     
