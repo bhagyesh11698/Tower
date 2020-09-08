@@ -20,10 +20,10 @@ public class BuildManager : MonoBehaviour
     }*/
     private TurretBlueprint turrentToBuild;
 
-    public bool canBuild
-    {
-        get { return turrentToBuild != null; }
-    }
+    public bool CanBuild     {   get { return turrentToBuild != null; }    }
+    public bool HasMoney     {   get { return PlayerStats.Money >= turrentToBuild.cost; }    }
+    // return false if enough money is not available
+
 
     public void BuildTurretOn(Node node)
     {
