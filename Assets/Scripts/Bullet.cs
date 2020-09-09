@@ -5,7 +5,8 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     private Transform target;
-    public float speed = 70f;
+    public float speed = 10f;
+    public int damage = 50;
 
     // bullet will hit all the enemies if it's in radius
     public float explosionRadius = 0f; 
@@ -37,7 +38,7 @@ public class Bullet : MonoBehaviour
     }
     void HitTarget()
     {
-        if (explosionRadius > 0)
+        if (explosionRadius > 0f)
         {
             Explode();
         }
@@ -63,8 +64,12 @@ public class Bullet : MonoBehaviour
 
     void Damage(Transform enemy)
     {
-        Destroy(enemy.gameObject);
+        Enemy e = enemy.GetComponent<Enemy>();
 
+        if (e != null)
+        {
+            e.TakeDamage(damage);
+        }
     }
 
     private void OnDrawGizmosSelected()

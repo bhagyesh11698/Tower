@@ -68,10 +68,10 @@ public class Turret : MonoBehaviour
         
         partToRotate.rotation = Quaternion.Euler(0f, rotation.y, 0f);
 
-        if (fireCountDown >= 0f)
+        if (fireCountDown <= 0f)
         {
             Shoot();
-            fireCountDown = 1f / fireRate;
+            fireCountDown = 1f / fireRate; // reduce firing rate
         }
         fireCountDown -= Time.deltaTime;
 
