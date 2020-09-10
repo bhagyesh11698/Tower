@@ -37,7 +37,7 @@ public class Turret : MonoBehaviour
         float shortestDistance = Mathf.Infinity;
         GameObject nearestEnemy = null;
 
-
+            
         foreach (GameObject enemy in enemies)
         {
             float distancetoEnemy = Vector3.Distance(transform.position, enemy.transform.position);
@@ -108,8 +108,10 @@ public class Turret : MonoBehaviour
         {
             lineRenderer.enabled = true;
         }
+
         lineRenderer.SetPosition(0, firePoint.position);
         lineRenderer.SetPosition(1, target.position);
+
     }
 
     void Shoot()
