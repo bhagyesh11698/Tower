@@ -37,10 +37,14 @@ public class Node : MonoBehaviour
             return;
         }
 
-        if (!buildManager.CanBuild)
-            return;
-
         if (turret != null)
+        {
+            buildManager.SelectNode(this);
+            return;
+        }
+
+
+        if (!buildManager.CanBuild)
             return;
 
         buildManager.BuildTurretOn(this);
@@ -68,7 +72,4 @@ public class Node : MonoBehaviour
     {
         rend.material.color = startColor;
     }
-
-
-
 }
