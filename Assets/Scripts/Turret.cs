@@ -5,6 +5,7 @@ using UnityEngine;
 public class Turret : MonoBehaviour
 {
     private Transform target;
+    private Enemy targetEnemy;
 
     [Header("General")]
     public float range = 15f;
@@ -16,6 +17,11 @@ public class Turret : MonoBehaviour
 
     [Header("Use Laser")]
     public bool useLaser = false;
+
+    public int damageOverTime = 30;
+    public float slowAmount = .5f; 
+    // will reduce speed of enemy by 50% even if more than one turrets are hitting
+
     public LineRenderer lineRenderer;
     
 
@@ -51,6 +57,7 @@ public class Turret : MonoBehaviour
         if (nearestEnemy !=null && shortestDistance <= range)
         {
             target = nearestEnemy.transform;
+            targetEnemy = nearestEnemy.GetComponent<Enemy>();
         }
         else
         {
@@ -104,6 +111,12 @@ public class Turret : MonoBehaviour
 
     void Laser()
     {
+        targetEnemy.TakeDamage(damageOverTime * Time.deltaTime);
+        // time.deltatime is multiplied to prevent issues with different frame rates
+        // damage will be done per second and not after every frame
+
+        targetEnemy.Slow(slowAmount);
+
         if (!lineRenderer.enabled)
         {
             lineRenderer.enabled = true;
@@ -113,7 +126,7 @@ public class Turret : MonoBehaviour
         lineRenderer.SetPosition(1, target.position);
 
     }
-
+     
     void Shoot()
     {
        GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
