@@ -25,24 +25,6 @@ public class BuildManager : MonoBehaviour
     // return false if enough money is not available
 
 
-    public void BuildTurretOn(Node node)
-    {
-        if (PlayerStats.Money < turrentToBuild.cost)
-        {
-
-            return;
-        }
-
-        PlayerStats.Money -= turrentToBuild.cost;
-
-
-        // build a turret
-       GameObject turret = (GameObject)Instantiate(turrentToBuild.prefab, node.GetBuidPosition(), Quaternion.identity);
-       node.turret = turret;
-
-        Debug.Log("Turret Built Money Left : " + PlayerStats.Money);
-    }
-
     public void OnDrawGizmosSelected(TurretBlueprint turret)
     {
         turrentToBuild = turret;
@@ -71,6 +53,11 @@ public class BuildManager : MonoBehaviour
     {
         turrentToBuild = turret;
         DeselectNode();
+    }
+
+    public TurretBlueprint GetTurretToBuild()
+    {
+        return turrentToBuild;
     }
 
 }
