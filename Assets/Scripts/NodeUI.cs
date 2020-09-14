@@ -6,6 +6,8 @@ public class NodeUI : MonoBehaviour
     public GameObject ui;
     public TextMeshProUGUI upgradeCost;
     public Button upgradeButton;
+
+    public TextMeshProUGUI sellAmount;
     
 
     private Node target;
@@ -26,6 +28,7 @@ public class NodeUI : MonoBehaviour
             upgradeButton.interactable = false; //button functionality will be disabled 
 
         }
+        sellAmount.text = "$" + target.turretBlueprint.GetSellAmount();
 
         ui.SetActive(true);
     }
@@ -39,5 +42,11 @@ public class NodeUI : MonoBehaviour
     {
         target.UpgradeTurret();
         BuildManager.instance.DeselectNode(); // once we upgrade, menu will not stay open
+    }
+
+    public void Sell()
+    {
+        target.SellTurret();
+        BuildManager.instance.DeselectNode();
     }
 }

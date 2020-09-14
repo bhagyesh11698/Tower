@@ -95,6 +95,15 @@ public class Node : MonoBehaviour
 
         Debug.Log("Turret Built");
     }
+    public void SellTurret()
+    {
+        //selling price of turret will be half of it's purchase prize
+        // haven't considered upgrade costs
+        PlayerStats.Money += turretBlueprint.GetSellAmount();
+
+        Destroy(turret);
+        turretBlueprint = null;
+    }
 
     private void OnMouseEnter()
     {
