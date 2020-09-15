@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class GameOver : MonoBehaviour
 {
     public TextMeshProUGUI roundsText;
+    public SceneFader sceneFader;
+    public string menuSceneName = "MainMenu";
 
     private void OnEnable()
     {
@@ -15,11 +17,12 @@ public class GameOver : MonoBehaviour
 
     public void Retry()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        sceneFader.FadeTo(SceneManager.GetActiveScene().name);
     }
 
     public void Menu()
     {
-        Debug.Log("GO to menu");
+        sceneFader.FadeTo(menuSceneName);
     }
 }
