@@ -38,7 +38,7 @@ public class SceneFader : MonoBehaviour
             t += Time.deltaTime * 1f;
             float a = curve.Evaluate(t);
             img.color = new Color(0f, 0f, 0f, a); // r,g,b, alpha
-            yield return 0; // skip to the next frame - wait until next frame
+            yield return 0; // skip to the next frame / wait until next frame
         }
         SceneManager.LoadScene(scene);
     }
