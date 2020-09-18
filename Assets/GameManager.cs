@@ -12,12 +12,13 @@ public class GameManager : MonoBehaviour
         GameIsOver = false;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (GameIsOver)
         {
             return;
         }
+
         if (PlayerStats.Lives <= 0)
         {
             EndGame();
