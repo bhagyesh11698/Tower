@@ -31,6 +31,12 @@ public class WaveSpawner : MonoBehaviour
         }
         // new wave will not be spawned until all enemies are killed or reached end point
 
+        if (waveIndex == waves.Length)
+        {
+            gameManager.WinLevel();
+            this.enabled = false;
+        }
+
         if (countdown<=0f)
         {
             StartCoroutine(SpawnWave());
@@ -61,11 +67,8 @@ public class WaveSpawner : MonoBehaviour
             yield return new WaitForSeconds(1f / wave.rate);
         }
         waveIndex++;
-        if (waveIndex == waves.Length)
-        {
-            gameManager.WinLevel();
-            this.enabled = false;
-        }
+
+
     }
     void SpawnEnemy(GameObject enemy)
     {
